@@ -8,10 +8,10 @@ import imaplib
 import email
 import os
 import re
+import hashlib
 import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
 from email.header import decode_header
-import itertools
 
 import threading
 
@@ -74,10 +74,10 @@ def start():
 
             # decode the email subject
 
-                (subject, encoding) = decode_header(msg['Subject'])[0]
-                if isinstance(subject, bytes):
+            #    (subject, encoding) = decode_header(msg['Subject'])[0]
+            #    if isinstance(subject, bytes):
 
-                    subject = subject.decode(encoding)
+            #        subject = subject.decode(encoding)
 
                 From, encoding = decode_header(msg.get('From'))[0]
                 if isinstance(From, bytes):
@@ -105,6 +105,9 @@ def start():
                                  "server": "us1"
                               })
                               response = client.lists.add_list_member(os.environ['list_id'], {"email_address": get_email(body2), "status": "subscribed"})
+                              #response2 = response = client.lists.get_list_member_tags(os.environ["list_id"], "testasdahyt12213@fhy22.com")
+                              response2 = client.lists.batch_segment_members({"members_to_add": [get_email(body2)]}, os.environ['list_id'], "3092922")
+                              print(response2)
                             except ApiClientError as error:
                                print(error.text)
                             break
