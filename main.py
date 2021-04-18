@@ -48,7 +48,7 @@ def start():
 
     (status, messages) = imap.select('INBOX')
 
-    #threading.Timer(5.0, start).start()
+    threading.Timer(5.0, start).start()
     #ex every 5 secs
     # number of top emails to fetch
 
