@@ -1,1 +1,1 @@
-web: gunicorn main.py:<main method name>
+web: gunicorn main:start
